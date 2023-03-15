@@ -9,12 +9,28 @@ public class Polinomio {
         this.grado = -1;
     }
 
+    public Nodo getTermino_mayor() {
+        return termino_mayor;
+    }
+
+    public void setTermino_mayor(Nodo termino_mayor) {
+        this.termino_mayor = termino_mayor;
+    }
+
+    public int getGrado() {
+        return grado;
+    }
+
+    public void setGrado(int grado) {
+        this.grado = grado;
+    }
+
     public void agregarTermino(int termino, double valor){
         Nodo aux = new Nodo();
         DatoPolinomio dato = new DatoPolinomio(valor, termino);
-        aux.selfInfo(dato);
+        aux.info = dato.toString();
         if(termino > grado){
-            aux.selfSig(termino_mayor);
+            aux.setSig(termino_mayor);
             termino_mayor = aux;
             grado = termino;
         } else {
