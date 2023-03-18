@@ -12,8 +12,34 @@ public class Polinomio implements InterfazPolinomio {
     }
 
     @Override
-    public void caragarPolinomio(Polinomio polinomio) {
-        polinomioActual = polinomio;
+    public void agregarTermino(DatoPolinomio dato) {
+        NodoPolinomio nuevoTermino = new NodoPolinomio(dato, null);
+        if (this.terminoMayor == null){
+            this.terminoMayor = nuevoTermino;
+            this.grado = dato.termino;
+        }else{
+            NodoPolinomio nodoActual = this.terminoMayor;
+            NodoPolinomio nodoAnterior = null;
+            while (nodoActual != null && nodoActual.dato.termino > dato.termino){
+                nodoAnterior = nodoActual;
+                nodoActual = nodoActual.siguiente;
+            }
+            if (nodoActual != null && nodoActual.dato.termino == dato.termino){
+                nodoActual.dato.valor += dato.valor;
+                if (nodoActual.dato.valor == 0){
+                    if (nodoAnterior == null){
+                        this.terminoMayor = nodoActual.siguiente;
+                    }else{
+                        nodoAnterior.siguiente = nodoActual.siguiente;
+                    }
+                    if (this.terminoMayor != null){
+                        this.grado = this.terminoMayor.dato.termino;
+                    }else{
+                        this.grado = 0;
+                    }
+                }
+            }
+        }
 
     }
 
