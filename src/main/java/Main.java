@@ -52,6 +52,8 @@ public class Main {
             System.out.println("2.-Crear polinomio 2");
             System.out.println("3.-Sumar polinomios");
             System.out.println("4.-Multiplicar polinomios");
+            System.out.println("5.- Agregra término");
+            System.out.println("6.- Modificar polinomio");
 
             int opcion = sc.nextInt();
 
