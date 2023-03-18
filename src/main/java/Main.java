@@ -129,7 +129,8 @@ public class Main {
                 case 3:
                     if(polinomio1 != null && polinomio2 != null){
                         resultados = polinomio1.sumarPolinomios(polinomio1, polinomio2);
-                        System.out.println("El resultado de la suma es: " + resultados);
+                        System.out.println("El resultado de la suma es: " );
+                        resultados.mostrarPolinomio();
                     }else{
                         System.out.println("Tiene que crear los polinomios antes de sumarlos");
                     }
@@ -137,7 +138,8 @@ public class Main {
                 case 4:
                     if(polinomio1 != null && polinomio2 != null){
                         resultados = polinomio1.multiplicarPolinomios(polinomio1, polinomio2);
-                        System.out.println("El resultado de la multiplicación es: " + resultados);
+                        System.out.println("El resultado de la multiplicación es: ");
+                        resultados.mostrarPolinomio();
                     }else{
                         System.out.println("Tiene que crear los polinomios antes de multiplicarlos");
                     }

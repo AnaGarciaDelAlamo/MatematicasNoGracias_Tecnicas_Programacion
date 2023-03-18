@@ -58,8 +58,38 @@ public class Polinomio implements InterfazPolinomio {
 
     @Override
     public void mostrarPolinomio() {
-
+        NodoPolinomio nodoActual = terminoMayor;
+        boolean primero = true;
+        while (nodoActual != null) {
+            int coeficiente = nodoActual.dato.valor;
+            int exponente = nodoActual.dato.termino;
+            if (coeficiente != 0) {
+                if(!primero && coeficiente > 0){
+                    System.out.print("+");
+                }
+                if(coeficiente != 1 && coeficiente !=-1 || exponente == 0){
+                    System.out.print(coeficiente);
+                }else if(coeficiente == -1){
+                    System.out.print("-");
+                }
+                if(exponente > 1){
+                    System.out.print("x^" + exponente);
+                }else if (exponente == 1){
+                    System.out.print("x");
+                }
+                primero = false;
+            }
+            nodoActual = nodoActual.siguiente;
+        }
+        if(primero){
+            System.out.print("0");
+        }
+        System.out.println();
     }
+
+
+
+
 
     @Override
     public Polinomio sumarPolinomios(Polinomio polinomio1, Polinomio polinomio2) {
