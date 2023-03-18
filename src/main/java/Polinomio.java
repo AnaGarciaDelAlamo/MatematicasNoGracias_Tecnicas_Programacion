@@ -55,15 +55,10 @@ public class Polinomio implements InterfazPolinomio {
 
     }
 
+
     @Override
-    public int obtenerValorPolinomio(int x) {
-        int valorPolinomio = 0;
-        NodoPolinomio nodoActual = polinomioActual.terminoMayor;
-        while(nodoActual != null){
-            valorPolinomio += nodoActual.dato.valor * Math.pow(x, nodoActual.dato.termino);
-            nodoActual = nodoActual.siguiente;
-        }
-        return valorPolinomio;
+    public void mostrarPolinomio() {
+
     }
 
     @Override

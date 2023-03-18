@@ -142,6 +142,25 @@ public class Main {
                         System.out.println("Tiene que crear los polinomios antes de multiplicarlos");
                     }
                     break;
+                case 5:
+                    System.out.println("Ingrese el grado del polinomio:");
+                    int grado3 = sc.nextInt();
+
+                    Polinomio polinomio = new Polinomio(grado3, null);
+
+                    for (int i = 0; i <= grado3; i++) {
+                        System.out.println("Ingrese el coeficiente del término de grado " + i + ":");
+                        int coeficiente = sc.nextInt();
+                        polinomio.agregarTermino(new DatoPolinomio(coeficiente, i));
+                    }
+
+                    System.out.println("Polinomio ingresado:");
+                    System.out.println(polinomio);
+                    break;
+                case 6:
+                    DatoPolinomio nuevoDato = new DatoPolinomio(5,2);
+                    polinomio1.modificarPolinomio(nuevoDato, 0);
+                    break;
             }
         }
 
