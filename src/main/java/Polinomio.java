@@ -1,153 +1,68 @@
 import java.util.Scanner;
 
 public class Polinomio implements InterfazPolinomio {
-    int grado;
-    NodoPolinomio terminoMayor;
+private int grado;
+private DatoPolinomio terminoMayor;
 
-    Polinomio polinomioActual;
+public Polinomio(){
+    this.grado = 0;
+    this.terminoMayor = new DatoPolinomio(0.0, 0);
+}
 
-    public Polinomio(int grado, NodoPolinomio terminoMAyor){
+    public int getGrado() {
+        return grado;
+    }
+
+    public void setGrado(int grado) {
         this.grado = grado;
+    }
+
+    public DatoPolinomio getTerminoMayor() {
+        return terminoMayor;
+    }
+
+    public void setTerminoMayor(DatoPolinomio terminoMayor) {
         this.terminoMayor = terminoMayor;
     }
 
     @Override
-    public void agregarTermino(DatoPolinomio dato) {
-        NodoPolinomio nuevoTermino = new NodoPolinomio(dato, null);
-        if (this.terminoMayor == null){
-            this.terminoMayor = nuevoTermino;
-            this.grado = dato.termino;
-        }else{
-            NodoPolinomio nodoActual = this.terminoMayor;
-            NodoPolinomio nodoAnterior = null;
-            while (nodoActual != null && nodoActual.dato.termino > dato.termino){
-                nodoAnterior = nodoActual;
-                nodoActual = nodoActual.siguiente;
-            }
-            if (nodoActual != null && nodoActual.dato.termino == dato.termino){
-                nodoActual.dato.valor += dato.valor;
-                if (nodoActual.dato.valor == 0){
-                    if (nodoAnterior == null){
-                        this.terminoMayor = nodoActual.siguiente;
-                    }else{
-                        nodoAnterior.siguiente = nodoActual.siguiente;
-                    }
-                    if (this.terminoMayor != null){
-                        this.grado = this.terminoMayor.dato.termino;
-                    }else{
-                        this.grado = 0;
-                    }
-                }
-            }
-        }
+    public void cargarPolinomio() {
 
     }
 
     @Override
-    public void modificarPolinomio(DatoPolinomio dato, int posicion) {
-        NodoPolinomio nodoActual = polinomioActual.terminoMayor;
-        for(int i = 0; i < posicion; i++){
-            nodoActual = nodoActual.siguiente;
-        }
-        if (nodoActual != null){
-            nodoActual.dato = dato;
-        }
+    public void modificarPolinomio() {
 
     }
 
-
     @Override
-    public void mostrarPolinomio() {
-        NodoPolinomio nodoActual = terminoMayor;
-        boolean primero = true;
-        while (nodoActual != null) {
-            int coeficiente = nodoActual.dato.valor;
-            int exponente = nodoActual.dato.termino;
-            if (coeficiente != 0) {
-                if(!primero && coeficiente > 0){
-                    System.out.print("+");
-                }
-                if(coeficiente != 1 && coeficiente !=-1 || exponente == 0){
-                    System.out.print(coeficiente);
-                }else if(coeficiente == -1){
-                    System.out.print("-");
-                }
-                if(exponente > 1){
-                    System.out.print("x^" + exponente);
-                }else if (exponente == 1){
-                    System.out.print("x");
-                }
-                primero = false;
-            }
-            nodoActual = nodoActual.siguiente;
-        }
-        if(primero){
-            System.out.print("0");
-        }
-        System.out.println();
-    }
-
-
-
-
-
-    @Override
-    public Polinomio sumarPolinomios(Polinomio polinomio1, Polinomio polinomio2) {
-        NodoPolinomio nodo1 = polinomio1.terminoMayor;
-        NodoPolinomio nodo2 = polinomio2.terminoMayor;
-        NodoPolinomio terminoMayor = null;
-        NodoPolinomio nodoActual = null;
-        int gradoSuma = Math.max(polinomio1.grado, polinomio2.grado);
-        for(int i = gradoSuma; i >= 0; i--){
-            int valor = 0;
-            if(nodo1 != null && nodo1.dato.termino == i){
-                valor += nodo1.dato.valor;
-                nodo1 = nodo1.siguiente;
-            }
-            if(nodo2 != null && nodo2.dato.termino == i){
-                valor += nodo2.dato.valor;
-                nodo2 = nodo2.siguiente;
-            }
-            if(valor != 0) {
-                NodoPolinomio nuevoTermino = new NodoPolinomio(new DatoPolinomio(valor, i), null);
-                if (terminoMayor == null) {
-                    terminoMayor = nuevoTermino;
-                    nodoActual = nuevoTermino;
-                } else {
-                    nodoActual.siguiente = nuevoTermino;
-                    nodoActual = nodoActual.siguiente;
-                }
-            }
-        }
-        return new Polinomio(gradoSuma, terminoMayor);
+    public double obtenerValor(int termino) {
+        return 0;
     }
 
     @Override
-    public Polinomio multiplicarPolinomios(Polinomio polinomio1, Polinomio polinomio2) {
-        NodoPolinomio nodo1 = polinomio1.terminoMayor;
-        NodoPolinomio nodo2 = polinomio2.terminoMayor;
-        Polinomio resultado = new Polinomio(polinomio1.grado + polinomio2.grado, null);
-        while(nodo1 != null){
-            NodoPolinomio terminoActual = null;
-            NodoPolinomio nodo2Actual = nodo2;
-            while(nodo2Actual != null){
-                DatoPolinomio datoMultiplicado = new DatoPolinomio(
-                        nodo1.dato.valor * nodo2Actual.dato.valor,
-                        nodo1.dato.termino + nodo2Actual.dato.termino
-                );
-                NodoPolinomio nuevoTermino = new NodoPolinomio(datoMultiplicado, null);
-                if(terminoActual == null){
-                    terminoActual = nuevoTermino;
-                }else{
-                    terminoActual.siguiente = nuevoTermino;
-                    terminoActual = terminoActual.siguiente;
-                }
-                nodo2Actual = nodo2Actual.siguiente;
-            }
-            resultado = sumarPolinomios(resultado, new Polinomio(polinomio1.grado + polinomio2.grado, terminoActual));
-            nodo1 = nodo1.siguiente;
-        }
-        return resultado;
+    public void sumarPolinomio(Polinomio p) {
+
+    }
+
+    @Override
+    public void multiplicarPolinomio(Polinomio p) {
+
+    }
+
+    @Override
+    public void mostrarContenido() {
+
+    }
+
+    @Override
+    public void eliminarTermino(int t) {
+
+    }
+
+    @Override
+    public boolean existeTermino(int t) {
+        return false;
     }
 }
 
