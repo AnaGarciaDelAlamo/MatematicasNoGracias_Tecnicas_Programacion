@@ -96,7 +96,22 @@ public Polinomio(){
 
     @Override
     public void multiplicarPolinomio(Polinomio p) {
+    Polinomio resultado = new Polinomio();
+    NodoPolinomio actual = terminoMayor;
+    NodoPolinomio actual2 = p.getTerminoMayor();
 
+    while(actual != null){
+        while(actual2 != null){
+            int termino = actual.getDato().getTermino() + actual2.getDato().getTermino();
+            double valor = actual.getDato().getValor() * actual2.getDato().getValor();
+            resultado.modificarPolinomio(termino, valor);
+            actual2 = actual2.getSiguiente();
+        }
+        actual = actual.siguiente;
+        actual2 = p.getTerminoMayor();
+    }
+    terminoMayor = resultado.getTerminoMayor();
+    grado = resultado.getGrado();
     }
 
     @Override
