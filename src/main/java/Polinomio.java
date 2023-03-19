@@ -1,12 +1,13 @@
 import java.util.Scanner;
 
 public class Polinomio implements InterfazPolinomio {
+    Scanner sc = new Scanner(System.in);
 private int grado;
-private DatoPolinomio terminoMayor;
+private NodoPolinomio terminoMayor;
 
 public Polinomio(){
-    this.grado = 0;
-    this.terminoMayor = new DatoPolinomio(0.0, 0);
+    this.grado = -1;
+    this.terminoMayor = null;
 }
 
     public int getGrado() {
@@ -17,11 +18,11 @@ public Polinomio(){
         this.grado = grado;
     }
 
-    public DatoPolinomio getTerminoMayor() {
+    public NodoPolinomio getTerminoMayor() {
         return terminoMayor;
     }
 
-    public void setTerminoMayor(DatoPolinomio terminoMayor) {
+    public void setTerminoMayor(NodoPolinomio terminoMayor) {
         this.terminoMayor = terminoMayor;
     }
 
@@ -31,17 +32,39 @@ public Polinomio(){
     }
 
     @Override
-    public void modificarPolinomio() {
+    public void modificarPolinomio(int t, double v) {
+    NodoPolinomio actual = terminoMayor;
+
+    while(actual != null && actual.getDato().getTermino() > t){
+        actual = actual.getSiguiente();
+    }
+    if(actual == null || actual.getDato().getTermino() < t){
+        NodoPolinomio nuevo = new NodoPolinomio(new DatoPolinomio(v, t), actual);
+        terminoMayor = nuevo;
+        grado = t;
+    }else{
+        actual.getDato().setValor(v);
+    }
 
     }
 
     @Override
     public double obtenerValor(int termino) {
+    NodoPolinomio actual = terminoMayor;
+
+    while(actual != null && actual.getDato().getTermino() > termino){
+        actual = actual.getSiguiente();
+    }
+    if(actual == null || actual.getDato().getTermino() < termino){
         return 0;
+    }else{
+        return actual.getDato().getValor();
+    }
     }
 
     @Override
     public void sumarPolinomio(Polinomio p) {
+
 
     }
 

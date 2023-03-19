@@ -1,8 +1,8 @@
 public class NodoPolinomio {
-    private DatoPolinomio dato;
-    private NodoPolinomio siguiente;
+    public DatoPolinomio dato;
+    public NodoPolinomio siguiente;
 
-    public NodoPolinomio(DatoPolinomio dato) {
+    public NodoPolinomio(DatoPolinomio dato, NodoPolinomio siguiente) {
         this.dato = dato;
         this.siguiente = null;
     }
