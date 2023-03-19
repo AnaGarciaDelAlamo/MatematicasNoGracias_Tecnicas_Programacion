@@ -121,6 +121,22 @@ public class Polinomio implements InterfazPolinomio {
 
     @Override
     public void eliminarTermino(int t) {
+        NodoPolinomio actual = terminoMayor;
+        NodoPolinomio anterior = null;
+
+        while(actual != null && actual.getDato().getTermino() != t){
+            anterior = actual;
+            actual = actual.getSiguiente();
+        }
+
+        if(actual == null){
+            System.out.println("El término " + t + " no existe");
+        }else if(anterior == null){
+            terminoMayor = actual.getSiguiente();
+        }else{
+            anterior.setSiguiente(actual.getSiguiente());
+        }
+        grado = calcularGrado();
 
     }
 
@@ -134,6 +150,19 @@ public class Polinomio implements InterfazPolinomio {
             }
         }
         return false;
+    }
+
+    @Override
+    public int calcularGrado() {
+        NodoPolinomio actual = terminoMayor;
+        int grado = -1;
+        while(actual != null){
+            if(actual.getDato().getTermino() > grado){
+                grado = actual.getDato().getTermino();
+            }
+            actual = actual.getSiguiente();
+        }
+        return grado;
     }
 }
 
