@@ -64,6 +64,32 @@ public Polinomio(){
 
     @Override
     public void sumarPolinomio(Polinomio p) {
+    NodoPolinomio actual = terminoMayor;
+    NodoPolinomio actual2 = p.getTerminoMayor();
+    NodoPolinomio ultimo = null;
+
+    while(actual != null || actual2 != null){
+        int termino1 = (actual != null) ? actual.getDato().getTermino() : -1;
+        int termino2 = (actual2 != null) ? actual2.getDato().getTermino() : -1;
+
+        if(termino1 > termino2){
+            NodoPolinomio nuevo = new NodoPolinomio(new DatoPolinomio(actual.getDato().getValor(), termino1), ultimo);
+            ultimo = nuevo;
+            actual = actual.getSiguiente();
+        }else if(termino1 < termino2){
+            NodoPolinomio nuevo = new NodoPolinomio(new DatoPolinomio(actual2.getDato().getValor(), termino2), ultimo);
+            ultimo = nuevo;
+            actual2 = actual2.getSiguiente();
+        }else{
+            double valor = actual.getDato().getValor() + actual2.getDato().getValor();
+            if (valor != 0){
+                NodoPolinomio nuevo = new NodoPolinomio(new DatoPolinomio(valor, termino1), ultimo);
+                ultimo = nuevo;
+            }
+            actual = actual.getSiguiente();
+            actual2 = actual2.getSiguiente();
+        }
+    }
 
 
     }
