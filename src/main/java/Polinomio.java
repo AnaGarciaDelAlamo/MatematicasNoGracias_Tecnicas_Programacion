@@ -116,6 +116,29 @@ public class Polinomio implements InterfazPolinomio {
 
     @Override
     public void mostrarContenido() {
+        NodoPolinomio actual = terminoMayor;
+        boolean primero = true;
+        while(actual != null){
+            double valor = actual.getDato().getValor();
+            int termino = actual.getDato().getTermino();
+            if(valor != 0){
+                if(primero){
+                    System.out.println(valor + "x^" + termino);
+                    primero = false;
+                }else{
+                    if(valor > 0){
+                        System.out.println(" + " + valor + "x^" + termino);
+                    } else {
+                        System.out.println(" - " + valor + "x^" + termino);
+                    }
+                }
+            }
+            actual = actual.getSiguiente();
+        }
+        if(primero){
+            System.out.print("0");
+        }
+        System.out.println();
 
     }
 
