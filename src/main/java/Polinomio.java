@@ -28,6 +28,24 @@ public class Polinomio implements InterfazPolinomio {
 
     @Override
     public void cargarPolinomio() {
+        System.out.println("Ingres ele grado del polinomio: ");
+        int grado = sc.nextInt();
+
+        for(int i = grado; i >= 0; i--){
+            System.out.println("Ingrese el coeficiente para el término x^"+ i+ ": ");
+            double valor = sc.nextDouble();
+
+            if(valor !=0){
+                NodoPolinomio nuevo = new NodoPolinomio(new DatoPolinomio(valor, i), null);
+                if(terminoMayor == null){
+                    terminoMayor = nuevo;
+                }else{
+                    terminoMayor.setSiguiente(nuevo);
+                    terminoMayor = nuevo;
+                }
+                this.grado = i;
+            }
+        }
 
     }
 
